@@ -17,3 +17,7 @@
 /phpunit.xml
 /.phpunit.cache/
 ###< phpunit/phpunit ###
+
+###> local tooling ###
+/.claude/settings.local.json
+###< local tooling ###
