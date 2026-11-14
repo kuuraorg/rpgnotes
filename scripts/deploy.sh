@@ -17,8 +17,12 @@ DEFAULT_URI="${DEFAULT_URI:-https://notes.example.com}"
 
 echo "→ Syncing files to ${REMOTE}:${DEST}"
 ssh "${REMOTE}" "mkdir -p ${DEST}"
+# Honour .gitignore so untracked local state (.superpowers/, .worktrees/, caches...)
+# never reaches the server. Excluded paths are also protected from --delete.
 rsync -avz --delete \
+  --filter=':- .gitignore' \
   --exclude '.git' \
+  --exclude '.claude/' \
   --exclude 'var/' \
   --exclude 'vendor/' \
   --exclude '.env.local' \
